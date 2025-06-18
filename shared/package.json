@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@types/express": "^5.0.3",
     "@types/http-status-codes": "^1.2.0",
     "@types/node": "^24.0.3",
     "http-status-codes": "^2.3.0",
