@@ -6,8 +6,33 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=users
+      - POSTGRES_DB=user_db
     ports:
       - "5432:5432"
     volumes:
       - ./docker-volumes/postgres:/var/lib/postgresql
+
+  mongodb:
+    container_name: mongodb_container
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./docker-volumes/mongodb:/data/db
+
+  redis:
+    container_name: redis_container
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker-volumes/redis:/data
+
+  rabbitmq:
+    container_name: rabbitmq_container
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./docker-volumes/rabbitmq:/var/lib/rabbitmq
