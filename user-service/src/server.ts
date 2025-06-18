@@ -1,4 +1,5 @@
 import express from "express"
+import { logger } from "@huseynovvusal/url-shortener-shared"
 
 const PORT = process.env.PORT || 3000
 
@@ -9,5 +10,5 @@ app.get("/", (_req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`User Service is running on http://localhost:${PORT}`)
+  logger.log("info", `User Service is running on PORT:${PORT}`)
 })
