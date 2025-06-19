@@ -24,5 +24,6 @@
       "@user-service/*": ["src/*"],
       "@config/*": ["src/config/*"]
     }
-  }
+  },
+  "exclude": ["jest.config.ts", "node_modules", "build", "dist"]
 }

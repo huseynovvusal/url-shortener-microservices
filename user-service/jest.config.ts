@@ -15,7 +15,6 @@ const config: Config.InitialOptions = {
     '!src/**/*.d.ts',
     '!src/server.ts',
   ],
-  setupFiles: ['<rootDir>/jest.setup.js'],
 };
 
 export default config;
