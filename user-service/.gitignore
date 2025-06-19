@@ -34,3 +34,4 @@ coverage/
 *.tgz
 *.bak
 *.swp
+/src/generated/prisma

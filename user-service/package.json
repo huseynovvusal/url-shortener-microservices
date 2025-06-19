@@ -14,7 +14,6 @@
     "@prisma/client": "^6.10.0",
     "bcrypt": "^6.0.0",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^6.10.0",
     "zod": "^3.25.67"
   },
   "devDependencies": {
@@ -27,6 +26,7 @@
     "install": "^0.13.0",
     "nodemon": "^3.1.10",
     "npm": "^11.4.2",
+    "prisma": "^6.10.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
