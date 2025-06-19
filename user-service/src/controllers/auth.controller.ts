@@ -75,3 +75,7 @@ export class AuthController {
     }
   }
 }
+
+export const createAuthController = (authService: AuthService) => {
+  return new AuthController(authService);
+};
