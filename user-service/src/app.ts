@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/', container.routers.authRouter);
+app.use('/api/users', container.routers.authRouter);
 
 // Error handler
 // @ts-ignore
