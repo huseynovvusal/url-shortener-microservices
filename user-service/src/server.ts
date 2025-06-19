@@ -10,5 +10,5 @@ app.get("/", (_req, res) => {
 })
 
 app.listen(PORT, () => {
-  logger.log("info", `User Service is running on PORT:${PORT}`)
+  logger.info(`User Service is running on PORT:${PORT}`)
 })
