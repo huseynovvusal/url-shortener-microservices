@@ -1,5 +1,8 @@
 import { z } from "zod"
 import { logger } from "@huseynovvusal/url-shortener-shared"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),

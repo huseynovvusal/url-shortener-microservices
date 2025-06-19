@@ -1,4 +1,4 @@
-import env from "@user-service/config/env"
+import env from "@config/env"
 
 const appConfig = {
   env: env.NODE_ENV,

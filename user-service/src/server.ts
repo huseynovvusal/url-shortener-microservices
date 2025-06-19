@@ -1,7 +1,8 @@
 import express from "express"
 import { logger } from "@huseynovvusal/url-shortener-shared"
+import appConfig from "@config/app.config"
 
-const PORT = process.env.PORT || 3000
+const PORT = appConfig.port
 
 const app = express()
 
