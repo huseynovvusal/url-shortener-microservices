@@ -1,7 +1,7 @@
 declare global {
   namespace Express {
     interface Request {
-      currentUser?: IAuthPayload
+      user?: IAuthPayload
     }
   }
 }

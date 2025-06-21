@@ -7,7 +7,10 @@ import { User } from '@user-service/generated/prisma';
 import { UserRepository } from '@user-service/repositories/user.repository';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { BadRequestError } from '@huseynovvusal/url-shortener-shared';
+import {
+  BadRequestError,
+  IAuthPayload,
+} from '@huseynovvusal/url-shortener-shared';
 import jwtConfig from '@user-service/config/jwt.config';
 
 export class AuthService {
@@ -59,9 +62,9 @@ export class AuthService {
 
   async validateToken(token: string): Promise<UserResponseDto> {
     try {
-      const payload = jwt.verify(token, jwtConfig.secret) as { userId: string };
+      const payload = jwt.verify(token, jwtConfig.secret) as IAuthPayload;
 
-      const user = await this.userRepository.findById(payload.userId);
+      const user = await this.userRepository.findById(payload.id);
 
       if (!user) {
         throw new BadRequestError('User not found');
@@ -74,9 +77,13 @@ export class AuthService {
   }
 
   private generateToken(user: User): string {
-    return jwt.sign({ userId: user.id }, jwtConfig.secret, {
-      expiresIn: jwtConfig.expiresIn,
-    });
+    return jwt.sign(
+      { id: user.id, email: user.email, username: user.username },
+      jwtConfig.secret,
+      {
+        expiresIn: jwtConfig.expiresIn,
+      }
+    );
   }
 
   private mapUserToDto(user: User): UserResponseDto {
