@@ -1,9 +1,9 @@
-import mongoose, { Document } from 'mongoose';
+import { Document } from 'mongoose';
 
 export interface IUrl {
   shortCode: string;
   originalUrl: string;
-  user: mongoose.Types.ObjectId;
+  userId: string;
   createdAt: Date;
   clickCount: number;
 }

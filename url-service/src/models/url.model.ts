@@ -12,7 +12,7 @@ const urlSchema = new Schema<IUrlDocument>(
       type: String,
       required: true,
     },
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: String, required: true },
     clickCount: {
       type: Number,
       default: 0,
