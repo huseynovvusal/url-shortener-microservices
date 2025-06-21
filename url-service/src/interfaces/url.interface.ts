@@ -5,6 +5,7 @@ export interface IUrl {
   originalUrl: string;
   userId: string;
   createdAt: Date;
+  updatedAt: Date;
   clickCount: number;
 }
 

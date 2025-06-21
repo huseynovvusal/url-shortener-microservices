@@ -1,11 +1,9 @@
-import mongoose from 'mongoose';
-
 export interface UrlResponseDto {
   id: string;
   shortCode: string;
   originalUrl: string;
   shortUrl: string;
-  user: mongoose.Types.ObjectId;
+  userId: string;
   clickCount: number;
   createdAt: Date;
   updatedAt: Date;

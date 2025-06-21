@@ -4,13 +4,17 @@ import UrlModel from '@user-service/models/url.model';
 import { generateShortCode } from '@user-service/utils/generate-short-code';
 
 export class UrlRepository {
-  async create(data: CreateUrlDto, userId: string): Promise<IUrlDocument> {
+  async create(
+    data: CreateUrlDto & {
+      userId: string;
+    }
+  ): Promise<IUrlDocument> {
     const shortCode = generateShortCode();
 
     const url = new UrlModel({
       shortCode,
       originalUrl: data.originalUrl,
-      userId: userId,
+      userId: data.userId,
     });
 
     return await url.save();
