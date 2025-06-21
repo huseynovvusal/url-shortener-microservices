@@ -10,6 +10,8 @@ const envSchema = z.object({
     .default('development'),
   PORT: z.string().transform(Number).default('3001'),
   DATABASE_URL: z.string(),
+  USER_SERVICE_URL: z.string(),
+  BASE_URL: z.string(),
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug']).default('info'),
 });
 
