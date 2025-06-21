@@ -18,6 +18,7 @@
     "express": "^5.1.0",
     "http-status-codes": "^2.3.0",
     "mongoose": "^8.16.0",
+    "nanoid": "^5.1.5",
     "zod": "^3.25.67"
   },
   "devDependencies": {
