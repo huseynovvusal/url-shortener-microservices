@@ -20,7 +20,9 @@ app.use('/api/urls', container.routers.urlRouter);
 // Redirect route for short URLs
 app.get(
   '/:shortCode',
-  container.controllers.urlController.redirectToOriginalUrl
+  container.controllers.urlController.redirectToOriginalUrl.bind(
+    container.controllers.urlController
+  )
 );
 
 // Error handler

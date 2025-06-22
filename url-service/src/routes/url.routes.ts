@@ -23,17 +23,17 @@ export const createUrlRouter = (
   );
 
   router.get(
-    '/:shortCode',
-    authMiddleware.authenticate.bind(authMiddleware),
-    validateRequest(getByShortCodeSchema),
-    urlController.getByShortCode.bind(urlController)
-  );
-
-  router.get(
     '/user',
     authMiddleware.authenticate.bind(authMiddleware),
     validateRequest(getUserUrlsSchema),
     urlController.getUrlsByUserId.bind(urlController)
+  );
+
+  router.get(
+    '/:shortCode',
+    authMiddleware.authenticate.bind(authMiddleware),
+    validateRequest(getByShortCodeSchema),
+    urlController.getByShortCode.bind(urlController)
   );
 
   router.delete(
