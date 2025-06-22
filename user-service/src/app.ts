@@ -12,6 +12,11 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use('/health-check', (_req, res, next) => {
+  res.status(200).json({ message: 'User service is running' });
+
+  next();
+});
 app.use('/api/users', container.routers.authRouter);
 
 // Error handler
