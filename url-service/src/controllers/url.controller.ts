@@ -13,7 +13,8 @@ export class UrlController {
 
       const url = await this.urlService.createShortUrl(urlData, userId);
 
-      return res.status(StatusCodes.CREATED).json({
+      // return
+      res.status(StatusCodes.CREATED).json({
         data: url,
       });
     } catch (error) {
@@ -27,7 +28,7 @@ export class UrlController {
 
       const url = await this.urlService.getUrlByShortCode(shortCode);
 
-      return res.status(StatusCodes.OK).json({
+      res.status(StatusCodes.OK).json({
         data: url,
       });
     } catch (error) {
@@ -47,7 +48,7 @@ export class UrlController {
 
       const result = await this.urlService.getUrlsByUserId(userId, page, limit);
 
-      return res.status(StatusCodes.OK).json(result);
+      res.status(StatusCodes.OK).json(result);
     } catch (error) {
       next(error);
     }
@@ -59,7 +60,7 @@ export class UrlController {
 
       await this.urlService.deleteUrlById(id);
 
-      return res.status(StatusCodes.NO_CONTENT).end();
+      res.status(StatusCodes.NO_CONTENT).end();
     } catch (error) {
       next(error);
     }
@@ -75,7 +76,7 @@ export class UrlController {
 
       const url = await this.urlService.incrementClickCount(shortCode);
 
-      return res.redirect(url.originalUrl);
+      res.redirect(url.originalUrl);
     } catch (error) {
       next(error);
     }

@@ -11,7 +11,7 @@ export const getByShortCodeSchema = z.object({
   }),
 });
 
-export const getUrlsByUserSchema = z.object({
+export const getUserUrlsSchema = z.object({
   query: z.object({
     page: z
       .string()
