@@ -15,7 +15,7 @@ export class AuthController {
 
       const user = await this.authService.register(validatedData);
 
-      return res.status(StatusCodes.CREATED).json({
+      res.status(StatusCodes.CREATED).json({
         data: user,
       });
     } catch (error) {
@@ -29,47 +29,49 @@ export class AuthController {
 
       const { user, token } = await this.authService.login(validatedData);
 
-      return res.status(200).json({ user, token });
+      res.status(200).json({ user, token });
     } catch (error) {
       next(error);
     }
   }
 
-  async me(req: Request, res: Response, next: NextFunction) {
+  async me(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const authHeader = req.headers.authorization;
 
       if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res
-          .status(StatusCodes.UNAUTHORIZED)
-          .json({ message: 'Unauthorized' });
+        res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Unauthorized' });
+        return;
       }
 
       const token = authHeader.split(' ')[1];
 
       const user = await this.authService.validateToken(token);
 
-      return res.status(StatusCodes.OK).json(user);
+      res.status(StatusCodes.OK).json(user);
     } catch (error) {
       next(error);
     }
   }
 
-  async validateToken(req: Request, res: Response, next: NextFunction) {
+  async validateToken(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const authHeader = req.headers.authorization;
 
       if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res
-          .status(StatusCodes.UNAUTHORIZED)
-          .json({ message: 'Unauthorized' });
+        res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Unauthorized' });
+        return;
       }
 
       const token = authHeader.split(' ')[1];
 
       const user = await this.authService.validateToken(token);
 
-      return res.status(StatusCodes.OK).json(user);
+      res.status(StatusCodes.OK).json(user);
     } catch (error) {
       next(error);
     }

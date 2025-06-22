@@ -19,28 +19,28 @@ export const createUrlRouter = (
     '/',
     authMiddleware.authenticate.bind(authMiddleware),
     validateRequest(createSchema),
-    urlController.create
+    urlController.create.bind(urlController)
   );
 
   router.get(
     '/:shortCode',
     authMiddleware.authenticate.bind(authMiddleware),
     validateRequest(getByShortCodeSchema),
-    urlController.getByShortCode
+    urlController.getByShortCode.bind(urlController)
   );
 
   router.get(
     '/user',
     authMiddleware.authenticate.bind(authMiddleware),
     validateRequest(getUserUrlsSchema),
-    urlController.getUrlsByUserId
+    urlController.getUrlsByUserId.bind(urlController)
   );
 
   router.delete(
     '/:id',
     authMiddleware.authenticate.bind(authMiddleware),
     validateRequest(deleteUrlSchema),
-    urlController.deleteUrl
+    urlController.deleteUrl.bind(urlController)
   );
 
   return router;

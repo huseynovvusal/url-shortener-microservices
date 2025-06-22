@@ -4,7 +4,7 @@ import {
   loginSchema,
   registerSchema,
 } from '@user-service/validations/auth.schema';
-import { NextFunction, Request, Response, Router } from 'express';
+import { Router } from 'express';
 
 export const createAuthRouter = (authController: AuthController) => {
   const router = Router();
@@ -12,28 +12,20 @@ export const createAuthRouter = (authController: AuthController) => {
   router.post(
     '/register',
     validateRequest(registerSchema),
-    (req: Request, res: Response, next: NextFunction) => {
-      authController.register(req, res, next);
-    }
+    authController.register.bind(authController)
   );
 
   router.post(
     '/login',
     validateRequest(loginSchema),
-    (req: Request, res: Response, next: NextFunction) => {
-      authController.login(req, res, next);
-    }
+    authController.login.bind(authController)
   );
 
-  router.get('/me', (req: Request, res: Response, next: NextFunction) => {
-    authController.me(req, res, next);
-  });
+  router.get('/me', authController.me.bind(authController));
 
   router.get(
     '/validate-token',
-    (req: Request, res: Response, next: NextFunction) => {
-      authController.validateToken(req, res, next);
-    }
+    authController.validateToken.bind(authController)
   );
 
   return router;
