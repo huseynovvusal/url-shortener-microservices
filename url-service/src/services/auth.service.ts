@@ -14,14 +14,13 @@ export class AuthService {
 
   async validateToken(token: string): Promise<UserResponseDto> {
     try {
-      const response = await axios.get<UserResponseDto>(
-        `${this.appConfig.userServiceUrl}/auth/validate`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const url = `${this.appConfig.userServiceUrl}/api/users/validate-token`;
+
+      const response = await axios.get<UserResponseDto>(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return response.data;
     } catch (error) {
