@@ -10,6 +10,7 @@ const server = app.listen(PORT, () => {
 
 const shutdown = async () => {
   logger.info('Shutting down server...');
+
   server.close(async () => {
     logger.info('Server shut down successfully');
     process.exit(0);
