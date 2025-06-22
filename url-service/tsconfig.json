@@ -21,7 +21,7 @@
     "pretty": true,
     "resolveJsonModule": true,
     "paths": {
-      "@user-service/*": ["src/*"],
+      "@url-service/*": ["src/*"],
       "@config/*": ["src/config/*"]
     }
   },

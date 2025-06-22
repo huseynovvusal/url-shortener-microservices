@@ -1,4 +1,4 @@
-import { createUrlSchema } from '@user-service/dtos/create-url.dto';
+import { createUrlSchema } from '@url-service/dtos/create-url.dto';
 import { z } from 'zod';
 
 export const createSchema = z.object({

@@ -1,7 +1,7 @@
-import { CreateUrlDto } from '@user-service/dtos/create-url.dto';
-import { IUrlDocument } from '@user-service/interfaces/url.interface';
-import UrlModel from '@user-service/models/url.model';
-import { generateShortCode } from '@user-service/utils/generate-short-code';
+import { CreateUrlDto } from '@url-service/dtos/create-url.dto';
+import { IUrlDocument } from '@url-service/interfaces/url.interface';
+import UrlModel from '@url-service/models/url.model';
+import { generateShortCode } from '@url-service/utils/generate-short-code';
 
 export class UrlRepository {
   async create(

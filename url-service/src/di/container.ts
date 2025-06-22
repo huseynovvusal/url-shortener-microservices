@@ -1,11 +1,11 @@
-import appConfig from '@user-service/config/app.config';
-import { createUrlController } from '@user-service/controllers/url.controller';
-import { connectDatabase } from '@user-service/helpers/connect-db';
-import { createAuthMiddleware } from '@user-service/middlewares/auth.middleware';
-import { createUrlRepository } from '@user-service/repositories/url.repository';
-import { createUrlRouter } from '@user-service/routes/url.routes';
-import { createAuthService } from '@user-service/services/auth.service';
-import { createUrlService } from '@user-service/services/url.service';
+import appConfig from '@url-service/config/app.config';
+import { createUrlController } from '@url-service/controllers/url.controller';
+import { connectDatabase } from '@url-service/helpers/connect-db';
+import { createAuthMiddleware } from '@url-service/middlewares/auth.middleware';
+import { createUrlRepository } from '@url-service/repositories/url.repository';
+import { createUrlRouter } from '@url-service/routes/url.routes';
+import { createAuthService } from '@url-service/services/auth.service';
+import { createUrlService } from '@url-service/services/url.service';
 import mongoose from 'mongoose';
 
 connectDatabase();

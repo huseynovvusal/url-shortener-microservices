@@ -1,5 +1,5 @@
 import { UnauthorizedError } from '@huseynovvusal/url-shortener-shared';
-import { AppConfig } from '@user-service/config/app.config';
+import { AppConfig } from '@url-service/config/app.config';
 import axios from 'axios';
 
 export interface UserResponseDto {

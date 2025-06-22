@@ -1,4 +1,4 @@
-import { IUrlDocument } from '@user-service/interfaces/url.interface';
+import { IUrlDocument } from '@url-service/interfaces/url.interface';
 import mongoose, { Schema } from 'mongoose';
 
 const urlSchema = new Schema<IUrlDocument>(

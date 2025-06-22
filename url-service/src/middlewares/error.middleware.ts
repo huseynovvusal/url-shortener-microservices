@@ -9,7 +9,7 @@ export const errorMiddleware = (
   res: Response,
   _next: NextFunction
 ) => {
-  logger.error(error);
+  logger.error(error.message);
 
   if (error instanceof ZodError) {
     return res.status(StatusCodes.BAD_REQUEST).json({

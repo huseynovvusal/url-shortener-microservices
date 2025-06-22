@@ -1,9 +1,9 @@
 import { NotFoundError } from '@huseynovvusal/url-shortener-shared';
-import { AppConfig } from '@user-service/config/app.config';
-import { CreateUrlDto } from '@user-service/dtos/create-url.dto';
-import { UrlResponseDto } from '@user-service/dtos/url-response.dto';
-import { IUrlDocument } from '@user-service/interfaces/url.interface';
-import { UrlRepository } from '@user-service/repositories/url.repository';
+import { AppConfig } from '@url-service/config/app.config';
+import { CreateUrlDto } from '@url-service/dtos/create-url.dto';
+import { UrlResponseDto } from '@url-service/dtos/url-response.dto';
+import { IUrlDocument } from '@url-service/interfaces/url.interface';
+import { UrlRepository } from '@url-service/repositories/url.repository';
 
 export class UrlService {
   constructor(

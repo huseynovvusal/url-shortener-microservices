@@ -1,12 +1,12 @@
-import { UrlController } from '@user-service/controllers/url.controller';
-import { AuthMiddleware } from '@user-service/middlewares/auth.middleware';
-import { validateRequest } from '@user-service/middlewares/validation.middleware';
+import { UrlController } from '@url-service/controllers/url.controller';
+import { AuthMiddleware } from '@url-service/middlewares/auth.middleware';
+import { validateRequest } from '@url-service/middlewares/validation.middleware';
 import {
   createSchema,
   deleteUrlSchema,
   getByShortCodeSchema,
   getUserUrlsSchema,
-} from '@user-service/validations/url.schema';
+} from '@url-service/validations/url.schema';
 import { Router } from 'express';
 
 export const createUrlRouter = (

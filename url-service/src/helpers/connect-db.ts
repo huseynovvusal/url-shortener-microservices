@@ -1,14 +1,17 @@
-import dbConfig from '@user-service/config/db.config';
+import dbConfig from '@url-service/config/db.config';
 import mongoose from 'mongoose';
+import { logger } from '@huseynovvusal/url-shortener-shared';
 
 export const connectDatabase = async () => {
   mongoose
     .connect(dbConfig.url)
     .then((value) =>
-      console.log(`MongoDB Connection Successful: ${value.connection.host}`)
+      logger.info(
+        `MongoDB Connection Successful: ${value.connection.host}:${value.connection.port}/${value.connection.name}`
+      )
     )
     .catch((error) => {
-      console.log('MongoDB Connection Error:', error);
+      logger.error('MongoDB Connection Error:', error);
 
       process.exit(1);
     });

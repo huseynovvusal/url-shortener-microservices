@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AuthService } from '@user-service/services/auth.service';
+import { AuthService } from '@url-service/services/auth.service';
 import { StatusCodes } from 'http-status-codes';
 
 export class AuthMiddleware {
@@ -21,9 +21,7 @@ export class AuthMiddleware {
 
       next();
     } catch (error) {
-      res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json({ message: 'Unauthorized', error });
+      next(error);
     }
   }
 }

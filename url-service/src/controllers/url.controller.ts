@@ -1,5 +1,5 @@
-import { CreateUrlDto } from '@user-service/dtos/create-url.dto';
-import { UrlService } from '@user-service/services/url.service';
+import { CreateUrlDto } from '@url-service/dtos/create-url.dto';
+import { UrlService } from '@url-service/services/url.service';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 

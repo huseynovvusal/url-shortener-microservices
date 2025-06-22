@@ -1,6 +1,6 @@
 import { logger } from '@huseynovvusal/url-shortener-shared';
 import appConfig from '@config/app.config';
-import app from '@user-service/app';
+import app from '@url-service/app';
 
 const PORT = appConfig.port;
 
