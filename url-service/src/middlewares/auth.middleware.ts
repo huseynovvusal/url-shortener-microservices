@@ -7,11 +7,6 @@ export class AuthMiddleware {
 
   public async authenticate(req: Request, res: Response, next: NextFunction) {
     try {
-      console.log(1);
-      // !
-      console.log(this.authService);
-      console.log(2);
-
       const token = this.authService.extractTokenFromHeader(
         req.headers.authorization
       );
@@ -26,7 +21,6 @@ export class AuthMiddleware {
 
       next();
     } catch (error) {
-      console.log('Authentication error:', error);
       next(error);
     }
   }
