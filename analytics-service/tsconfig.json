@@ -21,7 +21,7 @@
     "pretty": true,
     "resolveJsonModule": true,
     "paths": {
-      "@url-service/*": ["src/*"],
+      "@analytics-service/*": ["src/*"],
       "@config/*": ["src/config/*"]
     }
   },

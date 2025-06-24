@@ -1,4 +1,4 @@
-import { URLAnalyticsDocument } from '@url-service/interfaces/url-analytics.interface';
+import { URLAnalyticsDocument } from '@analytics-service/interfaces/url-analytics.interface';
 import mongoose, { Schema } from 'mongoose';
 
 const URLAnalyticsSchema = new Schema<URLAnalyticsDocument>(
