@@ -3,10 +3,7 @@ import { URLAnalytics } from '@analytics-service/interfaces/url-analytics.interf
 import { IURLAnalyticsRepository } from '@analytics-service/repositories/url-analytics.repository';
 
 export interface IAnalyticsService {
-  recordClick(
-    urlId: string,
-    clickData: ClickData
-  ): Promise<URLAnalytics | null>;
+  recordClick(urlId: string, clickData: ClickData): Promise<URLAnalytics | null>;
   getUrlAnalytics(urlId: string): Promise<URLAnalytics | null>;
   getAnalyticsForUrls(urlIds: string[]): Promise<URLAnalytics[]>;
 }
@@ -14,10 +11,7 @@ export interface IAnalyticsService {
 export class AnalyticsService implements IAnalyticsService {
   constructor(private readonly analyticsRepository: IURLAnalyticsRepository) {}
 
-  public async recordClick(
-    urlId: string,
-    clickData: ClickData
-  ): Promise<URLAnalytics | null> {
+  public async recordClick(urlId: string, clickData: ClickData): Promise<URLAnalytics | null> {
     return this.analyticsRepository.incrementClick(urlId, clickData);
   }
 
@@ -30,6 +24,5 @@ export class AnalyticsService implements IAnalyticsService {
   }
 }
 
-export const createAnalyticsService = (
-  analyticsRepository: IURLAnalyticsRepository
-) => new AnalyticsService(analyticsRepository);
+export const createAnalyticsService = (analyticsRepository: IURLAnalyticsRepository) =>
+  new AnalyticsService(analyticsRepository);
