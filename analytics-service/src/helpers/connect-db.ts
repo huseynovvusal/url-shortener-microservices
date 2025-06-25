@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { logger } from '@huseynovvusal/url-shortener-shared';
 
 export const connectDatabase = async () => {
-  mongoose
+  return mongoose
     .connect(dbConfig.url)
     .then((value) =>
       logger.info(
