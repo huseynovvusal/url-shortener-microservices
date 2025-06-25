@@ -6,7 +6,7 @@ import { closeConnections } from './di/container';
 const PORT = appConfig.port;
 
 const server = app.listen(PORT, () => {
-  logger.info(`User service is running on port ${PORT}`);
+  logger.info(`User Service is running on port ${PORT}`);
 });
 
 const shutdown = async () => {

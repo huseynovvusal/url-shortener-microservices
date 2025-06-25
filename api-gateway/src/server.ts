@@ -1,7 +1,6 @@
 import { logger } from '@huseynovvusal/url-shortener-shared';
 import appConfig from '@config/app.config';
-import app from '@url-service/app';
-import { connectDatabase } from './helpers/connect-db';
+import app from '@api-gateway/app';
 import { Server } from 'node:http';
 
 const PORT = appConfig.port;
@@ -10,10 +9,8 @@ let server: Server;
 
 const startServer = async () => {
   try {
-    await connectDatabase();
-
     server = app.listen(PORT, () => {
-      logger.info(`URL Service is running on port ${PORT}`);
+      logger.info(`API Gateway is running on port ${PORT}`);
     });
   } catch (error) {
     logger.error('Error starting server:', error);
