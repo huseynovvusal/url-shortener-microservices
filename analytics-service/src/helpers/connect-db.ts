@@ -1,4 +1,4 @@
-import dbConfig from '@url-service/config/db.config';
+import dbConfig from '@analytics-service/config/db.config';
 import mongoose from 'mongoose';
 import { logger } from '@huseynovvusal/url-shortener-shared';
 

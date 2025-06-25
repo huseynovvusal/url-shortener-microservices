@@ -1,6 +1,6 @@
 import { logger } from '@huseynovvusal/url-shortener-shared';
 import appConfig from '@config/app.config';
-import app from '@url-service/app';
+import app from '@analytics-service/app';
 import { connectDatabase } from './helpers/connect-db';
 import { Server } from 'node:http';
 
@@ -13,7 +13,7 @@ const startServer = async () => {
     await connectDatabase();
 
     server = app.listen(PORT, () => {
-      logger.info(`User service is running on port ${PORT}`);
+      logger.info(`Analytics Service is running on port ${PORT}`);
     });
   } catch (error) {
     logger.error('Error starting server:', error);

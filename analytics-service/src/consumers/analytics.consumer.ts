@@ -52,3 +52,5 @@ export class AnalyticsConsumer {
     });
   }
 }
+
+export const createAnalyticsConsumer = (analyticsService: IAnalyticsService) => new AnalyticsConsumer(analyticsService);

@@ -62,3 +62,6 @@ export class AnalyticsController {
     }
   }
 }
+
+export const createAnalyticsController = (analyticsService: IAnalyticsService) =>
+  new AnalyticsController(analyticsService);

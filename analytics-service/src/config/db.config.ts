@@ -1,4 +1,4 @@
-import env from '@url-service/config/env';
+import env from '@analytics-service/config/env';
 
 const dbConfig = {
   url: env.DATABASE_URL,
