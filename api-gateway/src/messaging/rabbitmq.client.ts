@@ -32,7 +32,7 @@ export class RabbitMQClient {
   private async setupQueues(): Promise<void> {
     if (!this.channel) return;
 
-    await this.channel.assertQueue('url_created', { durable: true });
+    await this.channel.assertQueue('clicks_queue', { durable: true });
   }
 
   private reconnect(): void {
