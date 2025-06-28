@@ -7,6 +7,7 @@ const URLAnalyticsSchema = new Schema<URLAnalyticsDocument>(
       type: String,
       required: true,
       unique: true,
+      index: true,
     },
     totalClicks: {
       type: Number,
@@ -41,11 +42,6 @@ const URLAnalyticsSchema = new Schema<URLAnalyticsDocument>(
   { timestamps: true }
 );
 
-URLAnalyticsSchema.index({ urlId: 1 }, { unique: true });
-
-const URLAnalyticsModel = mongoose.model<URLAnalyticsDocument>(
-  'URLAnalytics',
-  URLAnalyticsSchema
-);
+const URLAnalyticsModel = mongoose.model<URLAnalyticsDocument>('URLAnalytics', URLAnalyticsSchema);
 
 export default URLAnalyticsModel;
