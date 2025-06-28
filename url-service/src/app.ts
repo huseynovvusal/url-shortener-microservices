@@ -3,6 +3,7 @@ import { errorMiddleware } from './middlewares/error.middleware';
 import helmet from 'helmet';
 import cors from 'cors';
 import { container } from './di/container';
+import { StatusCodes } from 'http-status-codes';
 
 const app = express();
 
@@ -13,9 +14,9 @@ app.use(express.json());
 
 // Routes
 app.use('/health-check', (_req, res) => {
-  res.status(200).json({ message: 'Url service is running' });
+  res.status(StatusCodes.OK).json({ message: 'Url service is running' });
 });
-app.use('/api/urls', container.routers.urlRouter);
+app.use('/', container.routers.urlRouter);
 
 // Redirect route for short URLs
 app.get(

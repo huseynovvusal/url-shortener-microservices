@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { container } from './di/container';
 import { errorMiddleware } from './middlewares/error.middleware';
+import { StatusCodes } from 'http-status-codes';
 
 const app = express();
 
@@ -13,9 +14,9 @@ app.use(express.json());
 
 // Routes
 app.use('/health-check', (_req, res) => {
-  res.status(200).json({ message: 'User service is running' });
+  res.status(StatusCodes.OK).json({ message: 'User service is running' });
 });
-app.use('/api/users', container.routers.authRouter);
+app.use('/', container.routers.authRouter);
 
 // Error handler
 // @ts-ignore
