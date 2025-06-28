@@ -16,7 +16,7 @@ app.use(express.json());
 app.use('/health-check', (_req, res) => {
   res.status(StatusCodes.OK).json({ message: 'Url service is running' });
 });
-app.use('/', container.routers.urlRouter);
+app.use('/urls', container.routers.urlRouter);
 
 // Redirect route for short URLs
 app.get(

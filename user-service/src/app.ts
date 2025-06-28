@@ -16,7 +16,7 @@ app.use(express.json());
 app.use('/health-check', (_req, res) => {
   res.status(StatusCodes.OK).json({ message: 'User service is running' });
 });
-app.use('/', container.routers.authRouter);
+app.use('/users', container.routers.authRouter);
 
 // Error handler
 // @ts-ignore

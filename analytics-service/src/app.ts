@@ -16,7 +16,7 @@ app.use(helmet());
 app.use('/health-check', (_req, res) => {
   res.status(StatusCodes.OK).json({ message: 'Analytics service is running' });
 });
-app.use('/', container.routers.analyticsRouter);
+app.use('/analytics', container.routers.analyticsRouter);
 
 // Error handler
 //@ts-ignore
