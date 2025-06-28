@@ -35,6 +35,33 @@ export class RabbitMQClient {
     await this.channel.assertQueue('clicks_queue', { durable: true });
   }
 
+  public async publish<T = any>(queue: string, message: T): Promise<boolean> {
+    if (!this.channel || !this.connected) {
+      logger.error('RabbitMQ channel is not connected. Cannot publish message.');
+      return false;
+    }
+
+    try {
+      const content = Buffer.from(JSON.stringify(message));
+
+      const result = await this.channel.sendToQueue(queue, content, {
+        persistent: true,
+        timestamp: Date.now(),
+      });
+
+      if (result) {
+        logger.info(`Message sent to queue ${queue}:`, message);
+      } else {
+        logger.error(`Failed to send message to queue ${queue}:`, message);
+      }
+
+      return result;
+    } catch (error) {
+      logger.error(`Error publishing message to queue ${queue}:`, error);
+      return false;
+    }
+  }
+
   private reconnect(): void {
     if (this.attempts >= this.maxAttempts) {
       logger.error('Max connection attempts reached. Exiting...');
