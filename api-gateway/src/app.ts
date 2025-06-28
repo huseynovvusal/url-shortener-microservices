@@ -19,6 +19,7 @@ app.use(
   createProxyMiddleware({
     target: appConfig.userServiceUrl,
     changeOrigin: true,
+    secure: false,
     pathRewrite: { '^/api/users': '/users' },
     on: {
       error: (err, _req, _res) => {
