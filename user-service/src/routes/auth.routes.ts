@@ -11,10 +11,6 @@ export const createAuthRouter = (authController: AuthController) => {
 
   router.post(
     '/register',
-    (_, __, next) => {
-      console.log('Register endpoint hit');
-      next();
-    },
     validateRequest(registerSchema),
     authController.register.bind(authController)
   );
