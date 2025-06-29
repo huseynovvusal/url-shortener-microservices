@@ -1,4 +1,4 @@
-import { logger, UnauthorizedError } from '@huseynovvusal/url-shortener-shared';
+import { BaseError, logger } from '@huseynovvusal/url-shortener-shared';
 import { NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 import { StatusCodes } from 'http-status-codes';
@@ -19,8 +19,8 @@ export const errorMiddleware = (
     });
   }
 
-  if (error instanceof UnauthorizedError) {
-    return res.status(StatusCodes.UNAUTHORIZED).json({
+  if (error instanceof BaseError) {
+    return res.status(error.statusCode).json({
       status: 'error',
       message: error.message,
     });
