@@ -6,7 +6,10 @@ import { ClickData } from '@analytics-service/interfaces/click-data.interface';
 export class AnalyticsConsumer {
   private connection: amqp.ChannelModel | null = null;
   private channel: amqp.Channel | null = null;
-  static readonly CLICKS_QUEUE_NAME = 'clicks_queue';
+
+  static readonly QUEUE_NAME = 'clicks_queue';
+  static readonly EXCHANGE_NAME = 'clicks_exchange';
+  static readonly ROUTING_KEY = 'clicks';
 
   private analyticsService: IAnalyticsService;
 
@@ -19,8 +22,23 @@ export class AnalyticsConsumer {
       this.connection = await amqp.connect(rabbitMqUrl);
       this.channel = await this.connection.createChannel();
 
-      await this.channel.assertQueue(AnalyticsConsumer.CLICKS_QUEUE_NAME);
-      logger.info(`Connected to RabbitMQ at ${rabbitMqUrl} and asserted queue ${AnalyticsConsumer.CLICKS_QUEUE_NAME}`);
+      await this.channel.assertExchange(AnalyticsConsumer.EXCHANGE_NAME, 'direct');
+
+      await this.channel.assertQueue(AnalyticsConsumer.QUEUE_NAME, {
+        durable: true,
+        autoDelete: false,
+      });
+
+      await this.channel.bindQueue(
+        AnalyticsConsumer.QUEUE_NAME,
+        AnalyticsConsumer.EXCHANGE_NAME,
+        AnalyticsConsumer.ROUTING_KEY
+      );
+
+      // Set up graceful shutdown
+      process.once('SIGINT', this.close.bind(this));
+
+      logger.info(`Connected to RabbitMQ at ${rabbitMqUrl} and asserted queue ${AnalyticsConsumer.QUEUE_NAME}`);
     } catch (error) {
       logger.error(`Failed to connect to RabbitMQ: ${error}`);
       throw error;
@@ -32,9 +50,9 @@ export class AnalyticsConsumer {
       throw new Error('Channel is not initialized. Call connect() first.');
     }
 
-    this.channel.consume(AnalyticsConsumer.CLICKS_QUEUE_NAME, async (msg) => {
+    this.channel.consume(AnalyticsConsumer.QUEUE_NAME, async (msg) => {
       if (!msg) {
-        logger.warn('Received null message, skipping');
+        logger.warn('Received null message, skipping...');
         return;
       }
 
@@ -50,6 +68,17 @@ export class AnalyticsConsumer {
         this.channel!.nack(msg, true);
       }
     });
+  }
+
+  public async close(): Promise<void> {
+    if (this.channel) {
+      await this.channel.close();
+      logger.info('Channel closed');
+    }
+    if (this.connection) {
+      await this.connection.close();
+      logger.info('Connection closed');
+    }
   }
 }
 
