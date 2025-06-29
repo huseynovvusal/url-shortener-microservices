@@ -14,7 +14,7 @@ export class AuthService {
 
   async validateToken(token: string): Promise<UserResponseDto> {
     try {
-      const url = `${this.appConfig.userServiceUrl}/api/users/validate-token`;
+      const url = `${this.appConfig.userServiceUrl}/validate-token`;
 
       const response = await axios.get<UserResponseDto>(url, {
         headers: {

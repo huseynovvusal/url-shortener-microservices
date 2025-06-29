@@ -30,7 +30,7 @@ export const createUrlRouter = (
   );
 
   router.get(
-    '/:shortCode',
+    '/url/:shortCode',
     authMiddleware.authenticate.bind(authMiddleware),
     validateRequest(getByShortCodeSchema),
     urlController.getByShortCode.bind(urlController)

@@ -42,4 +42,14 @@ app.get('/health', (_req, res) => {
   res.status(StatusCodes.OK).json({ status: 'OK' });
 });
 
+// Redirect route for short URLs
+app.get(
+  '/:shortCode',
+  createProxyMiddleware({
+    target: appConfig.urlServiceUrl,
+    changeOrigin: true,
+    pathRewrite: { '^/': '/' },
+  })
+);
+
 export default app;
