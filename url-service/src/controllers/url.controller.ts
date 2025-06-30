@@ -5,6 +5,7 @@ import { AnalyticsProducer } from '@url-service/producers/analytics.producer';
 import { UrlService } from '@url-service/services/url.service';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ClickData } from '@url-service/interfaces/click-data.interface';
 
 export class UrlController {
   constructor(

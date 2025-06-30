@@ -1,5 +1,6 @@
 import * as amqp from 'amqplib';
 import { logger } from '@huseynovvusal/url-shortener-shared';
+import { ClickData } from '@url-service/interfaces/click-data.interface';
 
 export class AnalyticsProducer {
   private connection: amqp.ChannelModel | null = null;

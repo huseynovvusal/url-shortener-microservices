@@ -1,4 +1,4 @@
-interface ClickData {
+export interface ClickData {
   country?: string;
   referrer?: string;
   browser?: string;
