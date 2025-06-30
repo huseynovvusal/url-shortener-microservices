@@ -1,10 +1,16 @@
+import { NotFoundError } from '@huseynovvusal/url-shortener-shared';
 import { CreateUrlDto } from '@url-service/dtos/create-url.dto';
+import { parseUserAgent } from '@url-service/lib/ua-parser';
+import { AnalyticsProducer } from '@url-service/producers/analytics.producer';
 import { UrlService } from '@url-service/services/url.service';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 export class UrlController {
-  constructor(private readonly urlService: UrlService) {}
+  constructor(
+    private readonly urlService: UrlService,
+    private readonly analyticsProducer: AnalyticsProducer
+  ) {}
 
   public async create(req: Request, res: Response, next: NextFunction) {
     try {
@@ -76,6 +82,32 @@ export class UrlController {
 
       const url = await this.urlService.incrementClickCount(shortCode);
 
+      if (!url) {
+        throw new NotFoundError('URL not found');
+      }
+
+      const parsedUserAgent = parseUserAgent(
+        req.headers['user-agent'] as string
+      );
+
+      const clickData: ClickData = {
+        country: req.headers['x-country'] as string,
+        referrer: Array.isArray(req.headers.referer)
+          ? req.headers.referer[0]
+          : req.headers.referer ||
+            (Array.isArray(req.headers.referrer)
+              ? req.headers.referrer[0]
+              : req.headers.referrer),
+        browser: parsedUserAgent.browser,
+        device: parsedUserAgent.device,
+        operatingSystem: parsedUserAgent.operatingSystem,
+      };
+
+      // !
+      console.log('Click data:', clickData);
+
+      this.analyticsProducer.publishClickEvent(url.id, clickData);
+
       res.redirect(url.originalUrl);
     } catch (error) {
       next(error);
@@ -83,5 +115,7 @@ export class UrlController {
   }
 }
 
-export const createUrlController = (urlService: UrlService) =>
-  new UrlController(urlService);
+export const createUrlController = (
+  urlService: UrlService,
+  analyticsProducer: AnalyticsProducer
+) => new UrlController(urlService, analyticsProducer);
