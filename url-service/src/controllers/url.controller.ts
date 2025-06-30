@@ -105,7 +105,7 @@ export class UrlController {
       };
 
       // !
-      console.log('Click data:', clickData);
+      console.log('Click data:', clickData, req.headers.referer);
 
       this.analyticsProducer.publishClickEvent(url.id, clickData);
 
