@@ -28,6 +28,38 @@ export class AnalyticsProducer {
     }
   }
 
+  public async publishClickEvent(
+    urlId: string,
+    clickData: ClickData
+  ): Promise<void> {
+    if (!this.channel) {
+      throw new Error('Channel is not initialized. Call connect() first.');
+    }
+
+    try {
+      const message = JSON.stringify({ urlId, ...clickData });
+
+      const isPublished = this.channel.publish(
+        AnalyticsProducer.EXCHANGE_NAME,
+        AnalyticsProducer.ROUTING_KEY,
+        Buffer.from(message),
+        {
+          persistent: true,
+          contentType: 'application/json',
+        }
+      );
+
+      if (isPublished) {
+        logger.info(`Click event published for URL ID: ${urlId}`);
+      } else {
+        logger.warn(`Failed to publish click event for URL ID: ${urlId}`);
+      }
+    } catch (error) {
+      logger.error(`Error publishing click event: ${error}`);
+      throw error;
+    }
+  }
+
   public async close(): Promise<void> {
     if (this.channel) {
       await this.channel.close();
@@ -39,3 +71,5 @@ export class AnalyticsProducer {
     }
   }
 }
+
+export const createAnalyticsProducer = () => new AnalyticsProducer();
