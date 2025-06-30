@@ -1,15 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import hpp from 'hpp';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import appConfig from '@config/app.config';
 import { StatusCodes } from 'http-status-codes';
+import { rateLimitter } from './middlewares/rate-limit.middleware';
 
 const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(helmet());
+app.use(hpp());
+
+// Rate Limiting Middleware
+app.use(rateLimitter);
 
 // Routes
 app.use(
