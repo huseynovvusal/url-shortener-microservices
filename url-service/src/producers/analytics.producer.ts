@@ -14,6 +14,8 @@ export class AnalyticsProducer {
       this.connection = await amqp.connect(rabbitMqUrl);
       this.channel = await this.connection.createChannel();
 
+      console.log('1');
+
       await this.channel.assertExchange(
         AnalyticsProducer.EXCHANGE_NAME,
         'direct'

@@ -13,7 +13,9 @@ const startServer = async () => {
   try {
     await connectDatabase();
 
-    await container.producers.analyticsProducer.connect(appConfig.rabbitMqUrl);
+    await container.producers.analyticsProducer
+      .connect(appConfig.rabbitMqUrl)
+      .catch(console.log);
 
     server = app.listen(PORT, () => {
       logger.info(`URL Service is running on port ${PORT}`);

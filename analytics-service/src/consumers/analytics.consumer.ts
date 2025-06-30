@@ -35,6 +35,9 @@ export class AnalyticsConsumer {
         AnalyticsConsumer.ROUTING_KEY
       );
 
+      // Start consuming messages
+      this.consumeClickEvents();
+
       // Set up graceful shutdown
       process.once('SIGINT', this.close.bind(this));
 
@@ -61,6 +64,8 @@ export class AnalyticsConsumer {
         const { urlId, ...clickData } = clickEvent;
 
         await this.analyticsService.recordClick(urlId, clickData as ClickData);
+
+        logger.info(`Processed click event for URL ID: ${urlId}`);
 
         this.channel!.ack(msg);
       } catch (error) {
