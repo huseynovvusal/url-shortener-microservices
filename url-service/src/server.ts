@@ -3,6 +3,7 @@ import appConfig from '@config/app.config';
 import app from '@url-service/app';
 import { connectDatabase } from './helpers/connect-db';
 import { Server } from 'node:http';
+import { container } from './di/container';
 
 const PORT = appConfig.port;
 
@@ -11,6 +12,8 @@ let server: Server;
 const startServer = async () => {
   try {
     await connectDatabase();
+
+    await container.producers.analyticsProducer.connect(appConfig.rabbitMqUrl);
 
     server = app.listen(PORT, () => {
       logger.info(`URL Service is running on port ${PORT}`);
