@@ -17,6 +17,8 @@ const startServer = async () => {
       .connect(appConfig.rabbitMqUrl)
       .catch(console.log);
 
+    await container.services.redisService.connect();
+
     server = app.listen(PORT, () => {
       logger.info(`URL Service is running on port ${PORT}`);
     });
@@ -30,6 +32,9 @@ startServer();
 
 const shutdown = async () => {
   logger.info('Shutting down server...');
+
+  await container.services.redisService.disconnect();
+  await container.producers.analyticsProducer.close();
 
   server.close(async () => {
     logger.info('Server shut down successfully');

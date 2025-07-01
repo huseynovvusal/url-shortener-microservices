@@ -21,9 +21,6 @@ export class AnalyticsProducer {
         'direct'
       );
 
-      // Set up graceful shutdown
-      process.once('SIGINT', this.close.bind(this));
-
       logger.info(`Connected to RabbitMQ at ${rabbitMqUrl}`);
     } catch (error) {
       logger.error(`Failed to connect to RabbitMQ: ${error}`);

@@ -58,3 +58,6 @@ export class RedisService {
     }
   }
 }
+
+export const createRedisService = (redisConfig: RedisConfig) =>
+  new RedisService(redisConfig);
