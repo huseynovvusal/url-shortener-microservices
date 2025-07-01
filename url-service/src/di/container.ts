@@ -25,7 +25,11 @@ const analyticsProducer = createAnalyticsProducer();
 const authMiddleware = createAuthMiddleware(authService);
 
 // Controllers
-const urlController = createUrlController(urlService, analyticsProducer);
+const urlController = createUrlController(
+  urlService,
+  analyticsProducer,
+  redisService
+);
 
 // Routers
 const urlRouter = createUrlRouter(urlController, authMiddleware);

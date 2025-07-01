@@ -1,6 +1,7 @@
 import { Document } from 'mongoose';
 
 export interface IUrl {
+  id: string;
   shortCode: string;
   originalUrl: string;
   userId: string;
@@ -9,4 +10,4 @@ export interface IUrl {
   clickCount: number;
 }
 
-export interface IUrlDocument extends IUrl, Document {}
+export interface IUrlDocument extends Omit<IUrl, 'id'>, Document {}

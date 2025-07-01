@@ -1,4 +1,4 @@
-import { NotFoundError } from '@huseynovvusal/url-shortener-shared';
+import { logger, NotFoundError } from '@huseynovvusal/url-shortener-shared';
 import { CreateUrlDto } from '@url-service/dtos/create-url.dto';
 import { parseUserAgent } from '@url-service/lib/ua-parser';
 import { AnalyticsProducer } from '@url-service/producers/analytics.producer';
@@ -6,11 +6,14 @@ import { UrlService } from '@url-service/services/url.service';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ClickData } from '@url-service/interfaces/click-data.interface';
+import { RedisService } from '@url-service/services/redis.service';
+import { IUrl } from '@url-service/interfaces/url.interface';
 
 export class UrlController {
   constructor(
     private readonly urlService: UrlService,
-    private readonly analyticsProducer: AnalyticsProducer
+    private readonly analyticsProducer: AnalyticsProducer,
+    private readonly redisSercice: RedisService
   ) {}
 
   public async create(req: Request, res: Response, next: NextFunction) {
@@ -81,10 +84,22 @@ export class UrlController {
     try {
       const { shortCode } = req.params;
 
-      const url = await this.urlService.incrementClickCount(shortCode);
+      let url: IUrl | null = null;
 
-      if (!url) {
-        throw new NotFoundError('URL not found');
+      const cachedUrl = await this.redisSercice.get<IUrl>(`url:${shortCode}`);
+
+      if (cachedUrl) {
+        url = cachedUrl;
+
+        logger.debug('From redis');
+      } else {
+        logger.debug('From database');
+
+        url = await this.urlService.getUrlByShortCode(shortCode);
+
+        if (!url) throw new NotFoundError('URL not found');
+
+        this.redisSercice.set<IUrl>(`url:${shortCode}`, url, 3600);
       }
 
       const parsedUserAgent = parseUserAgent(
@@ -93,19 +108,13 @@ export class UrlController {
 
       const clickData: ClickData = {
         country: req.headers['x-country'] as string,
-        referrer: Array.isArray(req.headers.referer)
-          ? req.headers.referer[0]
-          : req.headers.referer ||
-            (Array.isArray(req.headers.referrer)
-              ? req.headers.referrer[0]
-              : req.headers.referrer),
+        referrer: req.headers.referer,
         browser: parsedUserAgent.browser,
         device: parsedUserAgent.device,
         operatingSystem: parsedUserAgent.operatingSystem,
       };
 
-      // !
-      console.log('Click data:', clickData, req.headers.referer);
+      // logger.debug('Click data:', clickData);
 
       this.analyticsProducer.publishClickEvent(url.id, clickData);
 
@@ -118,5 +127,6 @@ export class UrlController {
 
 export const createUrlController = (
   urlService: UrlService,
-  analyticsProducer: AnalyticsProducer
-) => new UrlController(urlService, analyticsProducer);
+  analyticsProducer: AnalyticsProducer,
+  redisService: RedisService
+) => new UrlController(urlService, analyticsProducer, redisService);
