@@ -12,6 +12,8 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   USER_SERVICE_URL: z.string(),
   BASE_URL: z.string(),
+  REDIS_URL: z.string(),
+  SHORT_URL_CACHE_TTL: z.string().transform(Number).default('3600'),
   RABBITMQ_URL: z.string(),
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug']).default('info'),
 });
