@@ -1,16 +1,16 @@
 import { RedisConfig } from '@url-service/config/redis.config';
-import { createClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
 import { logger } from '@huseynovvusal/url-shortener-shared';
 
 export class RedisService {
-  private client: any;
+  private client: RedisClientType;
 
   constructor(private readonly redisConfig: RedisConfig) {
     this.client = createClient({
       url: this.redisConfig.url,
     });
 
-    this.client.on('error', (err) => {
+    this.client.on('error', (err: Error) => {
       logger.error('Redis Client Error', err);
     });
   }
@@ -24,7 +24,16 @@ export class RedisService {
   }
 
   public async get<T>(key: string): Promise<T | null> {
-    return this.client.get(key);
+    const value = await this.client.get(key);
+
+    if (value === null) return null;
+
+    try {
+      const result: T = await JSON.parse(value);
+      return result;
+    } catch (error) {
+      return null;
+    }
   }
 
   public async set<T>(key: string, value: T, ttl?: number): Promise<void> {
