@@ -32,6 +32,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.3",
+    "@types/redis": "^4.0.10",
     "eslint": "^9.29.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",
