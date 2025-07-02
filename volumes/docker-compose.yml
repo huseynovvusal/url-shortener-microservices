@@ -39,3 +39,64 @@ services:
       - RABBITMQ_DEFAULT_PASS=admin
     volumes:
       - ./docker-volumes/rabbitmq:/var/lib/rabbitmq
+
+  gateway:
+    container_name: gateway_container
+    build:
+      context: ../api-gateway
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - ../api-gateway/.env
+    depends_on:
+      - user_service
+      - url_service
+      - analytics_service
+
+  user_service:
+    container_name: user_service_container
+    build:
+      context: ../user-service
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3001:3001"
+    env_file:
+      - ../user-service/.env
+    depends_on:
+      - postgres
+
+  url_service:
+    container_name: url_service_container
+    build:
+      context: ../url-service
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3002:3002"
+    env_file:
+      - ../url-service/.env
+    depends_on:
+      - mongodb
+      - redis
+      - rabbitmq
+      - user_service
+
+  analytics_service:
+    container_name: analytics_service_container
+    build:
+      context: ../analytics-service
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3003:3003"
+    env_file:
+      - ../analytics-service/.env
+    depends_on:
+      - mongodb
+      - redis
+      - rabbitmq
+      - user_service
+      - url_service
