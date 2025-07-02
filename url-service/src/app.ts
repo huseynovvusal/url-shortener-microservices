@@ -21,6 +21,11 @@ app.use('/', container.routers.urlRouter);
 // Redirect route for short URLs
 app.get(
   '/:shortCode',
+  (_req, _res, next) => {
+    console.log('>> Redirecting to original URL');
+
+    next();
+  },
   container.controllers.urlController.redirectToOriginalUrl.bind(
     container.controllers.urlController
   )

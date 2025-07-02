@@ -114,7 +114,7 @@ export class UrlController {
         operatingSystem: parsedUserAgent.operatingSystem,
       };
 
-      logger.debug('Click data:', clickData);
+      // logger.debug('Click data:', clickData);
 
       this.analyticsProducer.publishClickEvent(url.id, clickData);
 

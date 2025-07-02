@@ -13,10 +13,6 @@ const urlSchema = new Schema<IUrlDocument>(
       required: true,
     },
     userId: { type: String, required: true },
-    clickCount: {
-      type: Number,
-      default: 0,
-    },
   },
   {
     timestamps: true,

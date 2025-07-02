@@ -4,7 +4,6 @@ export interface UrlResponseDto {
   originalUrl: string;
   shortUrl: string;
   userId: string;
-  clickCount: number;
   createdAt: Date;
   updatedAt: Date;
 }

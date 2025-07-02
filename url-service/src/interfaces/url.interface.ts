@@ -7,7 +7,6 @@ export interface IUrl {
   userId: string;
   createdAt: Date;
   updatedAt: Date;
-  clickCount: number;
 }
 
 export interface IUrlDocument extends Omit<IUrl, 'id'>, Document {}

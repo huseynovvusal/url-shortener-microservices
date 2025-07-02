@@ -98,7 +98,6 @@ export class UrlService {
       originalUrl: url.originalUrl,
       shortUrl: `${this.appConfig.baseUrl}/${url.shortCode}`,
       userId: url.userId,
-      clickCount: url.clickCount,
       createdAt: url.createdAt,
       updatedAt: url.updatedAt,
     };
