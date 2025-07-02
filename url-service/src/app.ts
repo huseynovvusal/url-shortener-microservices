@@ -3,7 +3,6 @@ import { errorMiddleware } from './middlewares/error.middleware';
 import helmet from 'helmet';
 import cors from 'cors';
 import hpp from 'hpp';
-import mongoSanitize from 'express-mongo-sanitize';
 import { container } from './di/container';
 import { StatusCodes } from 'http-status-codes';
 import appConfig from './config/app.config';
@@ -19,11 +18,7 @@ app.use(
   })
 );
 app.use(hpp());
-app.use(
-  mongoSanitize({
-    replaceWith: '_',
-  })
-);
+// app.use(mongoSanitize());
 app.use(express.json());
 
 // Routes

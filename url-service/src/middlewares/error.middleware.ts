@@ -11,6 +11,9 @@ export const errorMiddleware = (
 ) => {
   logger.error(error.message);
 
+  // !
+  console.error(error);
+
   if (error instanceof ZodError) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       status: 'error',
