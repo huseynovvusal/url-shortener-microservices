@@ -2,6 +2,8 @@ import express from 'express';
 import { errorMiddleware } from './middlewares/error.middleware';
 import helmet from 'helmet';
 import cors from 'cors';
+import hpp from 'hpp';
+import mongoSanitize from 'express-mongo-sanitize';
 import { container } from './di/container';
 import { StatusCodes } from 'http-status-codes';
 
@@ -10,6 +12,12 @@ const app = express();
 // Middleware
 app.use(helmet());
 app.use(cors());
+app.use(hpp());
+app.use(
+  mongoSanitize({
+    replaceWith: '_',
+  })
+);
 app.use(express.json());
 
 // Routes

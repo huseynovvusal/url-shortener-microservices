@@ -70,6 +70,8 @@ export class UrlController {
 
       await this.urlService.deleteUrlById(id);
 
+      await this.redisSercice.delete(`url:${id}`);
+
       res.status(StatusCodes.NO_CONTENT).end();
     } catch (error) {
       next(error);
