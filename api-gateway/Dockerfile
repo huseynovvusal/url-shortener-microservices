@@ -1,8 +1,11 @@
-FROM node:20-alpine
+FROM node:22.17.0-alpine
+
+RUN apk update && apk upgrade
 
 WORKDIR /app
 
 COPY package*.json ./
+COPY .npmrc ./
 
 RUN npm install
 
