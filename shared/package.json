@@ -8,9 +8,16 @@
     "build": "tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vusal Huseynov",
   "license": "ISC",
   "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huseynovvusal/url-shortener-shared.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "dependencies": {
     "@types/express": "^5.0.3",
     "@types/http-status-codes": "^1.2.0",
