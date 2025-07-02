@@ -16,7 +16,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@huseynovvusal/url-shortener-shared": "^1.0.0",
+    "@huseynovvusal/url-shortener-shared": "^1.1.1",
     "amqplib": "^0.10.8",
     "axios": "^1.10.0",
     "cors": "^2.8.5",

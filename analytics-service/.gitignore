@@ -35,3 +35,5 @@ coverage/
 *.bak
 *.swp
 /src/generated/prisma
+
+.npmrc
