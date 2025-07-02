@@ -6,12 +6,18 @@ import hpp from 'hpp';
 import mongoSanitize from 'express-mongo-sanitize';
 import { container } from './di/container';
 import { StatusCodes } from 'http-status-codes';
+import appConfig from './config/app.config';
 
 const app = express();
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: [appConfig.baseUrl],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  })
+);
 app.use(hpp());
 app.use(
   mongoSanitize({

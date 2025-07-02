@@ -4,12 +4,18 @@ import helmet from 'helmet';
 import { container } from './di/container';
 import { errorMiddleware } from './middlewares/error.middleware';
 import { StatusCodes } from 'http-status-codes';
+import appConfig from './config/app.config';
 
 const app = express();
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: [appConfig.baseUrl, appConfig.urlServiceUrl],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  })
+);
 app.use(express.json());
 
 // Routes

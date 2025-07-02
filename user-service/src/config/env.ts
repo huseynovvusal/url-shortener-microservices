@@ -10,6 +10,8 @@ const envSchema = z.object({
     .default('development'),
   PORT: z.string().transform(Number).default('3001'),
   DATABASE_URL: z.string(),
+  BASE_URL: z.string(),
+  URL_SERVICE_URL: z.string(),
   JWT_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string().default('1d'),
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug']).default('info'),
