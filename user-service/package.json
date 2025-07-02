@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch src --exec ts-node -r tsconfig-paths/register src/server.ts",
     "start": "node build/server.js",
-    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "build": "prisma generate && tsc --project tsconfig.json && tsc-alias -p tsconfig.json && cp -r src/generated build/",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

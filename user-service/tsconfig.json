@@ -29,5 +29,6 @@
       "@config/*": ["src/config/*"]
     }
   },
+  "include": ["src/**/*"],
   "exclude": ["jest.config.ts", "node_modules", "build", "dist"]
 }
