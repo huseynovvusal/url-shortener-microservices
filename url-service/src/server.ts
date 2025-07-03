@@ -15,7 +15,7 @@ const startServer = async () => {
 
     await container.producers.analyticsProducer
       .connect(appConfig.rabbitMqUrl)
-      .catch(console.log);
+      .catch(logger.error);
 
     await container.services.redisService.connect();
 
