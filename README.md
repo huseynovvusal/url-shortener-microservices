@@ -1,6 +1,6 @@
 # 🚀 URL Shortener Microservices
 
-A modern, scalable URL shortening platform built using microservices architecture. This project demonstrates my skills and best practices in building distributed systems with Node.js, TypeScript, and Docker.
+A modern, scalable URL shortening platform built using microservices architecture. This project demonstrates my skills and best practices in building distributed systems with Node.js, TypeScript, Docker, Redis caching, and RabbitMQ event-driven communication.
 
 ## 📋 Overview
 
@@ -9,7 +9,9 @@ This robust URL shortener service provides:
 - ✅ Fast URL shortening with custom or auto-generated codes
 - ✅ User authentication and management
 - ✅ Comprehensive analytics and tracking
-- ✅ Scalable microservices architecture
+- ✅ Scalable microservices architecture with distributed data stores
+- ✅ High-performance caching using Redis
+- ✅ Event-driven architecture with RabbitMQ
 - ✅ Containerized deployment with Docker
 
 ## 🏗️ Architecture
