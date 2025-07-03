@@ -17,6 +17,7 @@ This robust URL shortener service provides:
 ## 🏗️ Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'darkMode': true, 'background': '#333', 'primaryTextColor': '#fff' }}}%%
 graph TD
     Client([Client/Browser]) --> Gateway[API Gateway]
 
@@ -61,12 +62,13 @@ graph TD
 
     class Client,Gateway,UserService,URLService,AnalyticsService,RabbitMQ,MongoDB,Redis,PostgreSQL,UserController,UserService_Service,UserRepository,URLController,URLService_Service,URLRepository,URLCache,AnalyticsController,AnalyticsService_Service,AnalyticsRepository,AnalyticsConsumer nodeStyle
 
-    classDef nodeStyle fill:#f9f9f9,stroke:#333,stroke-width:1px
-    classDef microservice fill:#d1f0fd,stroke:#0078d4,stroke-width:2px
-    classDef database fill:#e7f5d7,stroke:#5ca53a,stroke-width:2px
-    classDef messagebroker fill:#fde7c7,stroke:#ff8c00,stroke-width:2px
-    classDef gateway fill:#e7d1fd,stroke:#7b2cbf,stroke-width:2px
-    classDef client fill:#f5f5f5,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5
+    %% Styles that work in both light and dark modes
+    classDef nodeStyle fill:#f9f9f9,stroke:#333,stroke-width:1px,color:#333
+    classDef microservice fill:#d1f0fd,stroke:#0078d4,stroke-width:2px,color:#333
+    classDef database fill:#e7f5d7,stroke:#5ca53a,stroke-width:2px,color:#333
+    classDef messagebroker fill:#fde7c7,stroke:#ff8c00,stroke-width:2px,color:#333
+    classDef gateway fill:#e7d1fd,stroke:#7b2cbf,stroke-width:2px,color:#333
+    classDef client fill:#f5f5f5,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5,color:#333
 
     class UserService,URLService,AnalyticsService microservice
     class MongoDB,PostgreSQL,Redis database
