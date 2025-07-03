@@ -70,9 +70,9 @@ services:
     env_file:
       - ../user-service/.env
     environment:
-      - DATABASE_URL="postgresql://postgres:postgres@postgres:5432/users_db"
-      - BASE_URL="http://gateway:3000"
-      - URL_SERVICE_URL="http://url_service:3002"
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/users_db
+      - BASE_URL=http://gateway:3000
+      - URL_SERVICE_URL=http://url_service:3002
     depends_on:
       - postgres
 
