@@ -71,7 +71,7 @@ services:
       - ../user-service/.env
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/users_db
-      - BASE_URL=http://gateway:3000
+      - BASE_URL=http://localhost:3000
       - URL_SERVICE_URL=http://url_service:3002
     depends_on:
       - postgres
@@ -90,7 +90,7 @@ services:
       - DATABASE_URL=mongodb://mongodb:27017/urls_db
       - REDIS_URL=redis://redis:6379
       - USER_SERVICE_URL=http://user_service:3001
-      - BASE_URL=http://gateway:3000
+      - BASE_URL=http://localhost:3000
       - RABBITMQ_URL=amqp://admin:admin@rabbitmq:5672
     depends_on:
       - mongodb
