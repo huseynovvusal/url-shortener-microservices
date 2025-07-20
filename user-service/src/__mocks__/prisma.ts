@@ -1,28 +1,39 @@
+import { User } from '@user-service/interfaces/user.interface';
+
 export const mockUser = {
-  id: '1',
   email: 'test@example.com',
   username: 'testuser',
-  password: '$2b$10$test_password_hash',
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  password: 'test_password',
 };
 
-export const mockPrismaClient = {
-  user: {
-    create: jest.fn().mockResolvedValue(mockUser),
+export class MockPrismaClient {
+  private users: User[] = [];
+
+  user = {
+    create: jest.fn().mockImplementation(({ data }) => {
+      const newUser = {
+        ...data,
+        id: String(this.users.length + 1),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      this.users.push(newUser);
+
+      return Promise.resolve(newUser);
+    }),
     findUnique: jest.fn().mockImplementation(({ where }) => {
-      if (where.email === 'test@example.com') {
-        return Promise.resolve(mockUser);
-      }
-
-      return Promise.resolve(null);
+      const user = this.users.find(
+        (user) => user.id === where.id || user.email === where.email
+      );
+      return Promise.resolve(user || null);
     }),
-    findFirst: jest.fn().mockResolvedValue(mockUser),
+    findFirst: jest.fn().mockImplementation(() => {
+      return Promise.resolve(this.users[0]);
+    }),
     findById: jest.fn().mockImplementation(({ where }) => {
-      if (where.id === '1') {
-        return Promise.resolve(mockUser);
-      }
-      return Promise.resolve(null);
+      const user = this.users.find((user) => user.id === where.id);
+      return Promise.resolve(user || null);
     }),
-  },
-};
+  };
+}
